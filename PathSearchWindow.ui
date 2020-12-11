@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PathSearchWindow</class>
+ <widget class="QWidget" name="PathSearchWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>900</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>PathSearchWindow</string>
+  </property>
+  <widget class="QLabel" name="windowTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>131</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>等线</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>路线查询</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="fromLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>140</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>起始站点</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="fromLineSwitch">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>201</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="searchMethodGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>60</y>
+     <width>281</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>查询方法</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <widget class="QRadioButton" name="accurateSearchRadioButton">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>20</y>
+      <width>115</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>精确查询</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">searchMethodButtonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="fuzzySearchRadioButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>115</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>模糊查询</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">searchMethodButtonGroup</string>
+    </attribute>
+   </widget>
+  </widget>
+  <widget class="QLineEdit" name="toLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>140</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>目的站点</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="toLineSwitch">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>201</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="fromStationSwitch">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>260</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="toStationSwitch">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>260</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QListView" name="pathList">
+   <property name="geometry">
+    <rect>
+     <x>145</x>
+     <y>331</y>
+     <width>601</width>
+     <height>241</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="processButton">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>150</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Go!</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exitButton">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>540</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="searchMethodButtonGroup"/>
+ </buttongroups>
+</ui>
