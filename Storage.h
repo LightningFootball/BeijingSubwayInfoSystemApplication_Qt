@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "ListGraph.h"
 
 #include "Arc.h"
@@ -14,6 +13,7 @@
 #include <stdio.h>
 
 #include<qstring.h>
+#include<qstringlist.h>
 #include<qfile.h>
 #include<qtextstream.h>
 
@@ -23,7 +23,7 @@ public:
 	Storage();
 
 	bool setFromStation(QString fromStation);	//dijkstra initialize
-	QVector<QString> getPath(QString toStation);
+    QStringList getPath(QString toStation);
 	int getDistance(QString toStation);
 	int getFare(QString toStation);
 	QVector<QString> getLineNameList();		//线路名称列表

@@ -16,13 +16,38 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Arc.cpp \
+    Dijkstra.cpp \
+    FareSearchWindow.cpp \
+    Hash.cpp \
+    HashTable.cpp \
+    ListGraph.cpp \
+    Path.cpp \
+    PathSearchWindow.cpp \
+    PriorityQueue.cpp \
+    Storage.cpp \
+    Vertex.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    Arc.h \
+    DataProcess.h \
+    Dijkstra.h \
+    FareSearchWindow.h \
+    Hash.h \
+    HashTable.h \
+    ListGraph.h \
+    Path.h \
+    PathSearchWindow.h \
+    PriorityQueue.h \
+    Storage.h \
+    Vertex.h \
     mainwindow.h
 
 FORMS += \
+    FareSearchWindow.ui \
+    PathSearchWindow.ui \
     mainwindow.ui
 
 TRANSLATIONS += \
@@ -32,3 +57,9 @@ TRANSLATIONS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    BeijingSubwayInfoSystemApplication.qrc
+
+DISTFILES += \
+    SubwayInfoDatabase.txt

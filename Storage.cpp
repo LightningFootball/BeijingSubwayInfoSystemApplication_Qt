@@ -2,8 +2,8 @@
 
 Storage::Storage()
 {
-	QFile infoFile("SubwayInfoDatabase.txt");
-	infoFile.open(QIODevice::ReadOnly);		//open file
+    QFile infoFile("C:/WorkSpace/Beijing Subway Info System/BeijingSubwayInfoSystemApplication_Qt/SubwayInfoDatabase.txt");
+    infoFile.open(QIODevice::ReadOnly|QIODevice::Text);		//open file
 
 	QTextStream cin(stdin, QIODevice::ReadOnly);
 	QTextStream cout(stdout, QIODevice::WriteOnly);		//allow qstring could cout
@@ -63,10 +63,10 @@ bool Storage::setFromStation(QString fromStation)
 	return true;
 }
 
-QVector<QString> Storage::getPath(QString toStation)
+QStringList Storage::getPath(QString toStation)
 {
 	int toStationHash = stationHashList.search(toStation);
-	QVector<QString> path;
+    QStringList path;
 	for (int i = 1; stationPathList.dijkstraList[toStationHash][i] != -1; i++)
 	{
 		path.append(stationHashList.getName(stationPathList.dijkstraList[toStationHash][i]));

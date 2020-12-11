@@ -15,6 +15,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pathSearchButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
