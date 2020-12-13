@@ -21,6 +21,7 @@ SOURCES += \
     FareSearchWindow.cpp \
     Hash.cpp \
     HashTable.cpp \
+    InvalidInputDialog.cpp \
     ListGraph.cpp \
     Path.cpp \
     PathSearchWindow.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     FareSearchWindow.h \
     Hash.h \
     HashTable.h \
+    InvalidInputDialog.h \
     ListGraph.h \
     Path.h \
     PathSearchWindow.h \
@@ -47,6 +49,7 @@ HEADERS += \
 
 FORMS += \
     FareSearchWindow.ui \
+    InvalidInputDialog.ui \
     PathSearchWindow.ui \
     mainwindow.ui
 

@@ -4,6 +4,9 @@
 #include "ui_PathSearchWindow.h"
 
 #include <QStringListModel>
+#include <qstring.h>
+
+#include "InvalidInputDialog.h"
 
 #include "Storage.h"
 
@@ -14,7 +17,13 @@ class PathSearchWindow : public QWidget
 	Q_OBJECT
 
 public:
-    QStringListModel stringListModel;
+    QStringListModel pathStringListModel;
+
+    QStringListModel fromLineStringListModel;
+    QStringListModel fromStationStringListModel;
+    QStringListModel toLineStringListModel;
+    QStringListModel toStationStringListModel;
+
 
 	PathSearchWindow(QWidget *parent = Q_NULLPTR);
 	~PathSearchWindow();
@@ -29,4 +38,10 @@ private slots:
     void on_fromLineEdit_editingFinished();
     void on_toLineEdit_editingFinished();
     void on_processButton_clicked();
+    void on_fuzzySearchRadioButton_toggled(bool checked);
+    void on_accurateSearchRadioButton_toggled(bool checked);
+    void on_fromLineSwitch_currentIndexChanged(const QString &arg1);
+    void on_toLineSwitch_currentIndexChanged(const QString &arg1);
+    void on_fromStationSwitch_currentIndexChanged(const QString &arg1);
+    void on_toStationSwitch_currentIndexChanged(const QString &arg1);
 };

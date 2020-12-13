@@ -12,7 +12,7 @@ Storage::Storage()
 	int totalLineNum = totalLineNumSTRING.toInt();
 	lineNameList.resize(totalLineNum);
 
-	lineOrderList.resize(totalLineNum);
+    lineStationOrderList.resize(totalLineNum);
 
 	for (int i = 0; i < totalLineNum; i++)
 	{
@@ -38,14 +38,14 @@ Storage::Storage()
 			stationAdjacencyList.insert(fromStationHash, toStationHash, distance);
 			stationAdjacencyList.insert(toStationHash, fromStationHash, distance);	//exchange direction
 
-			lineOrderList[lineNum].append(fromStationHash);
+            lineStationOrderList[lineNum].append(fromStationHash);
 		}
 
 		QString lastStationString = readLineSpilted.last();
 		int lastStationHash = stationHashList.hash.doHash(lastStationString);
-		if (lineOrderList[lineNum][0] != lastStationHash)
+        if (lineStationOrderList[lineNum][0] != lastStationHash)
 		{
-			lineOrderList[lineNum].append(lastStationHash);
+            lineStationOrderList[lineNum].append(lastStationHash);
 		}
 	}
 
@@ -55,10 +55,14 @@ Storage::Storage()
 }
 
 
-bool Storage::setFromStation(QString fromStation)
+int Storage::setFromStation(QString fromStation)
 {
 	stationPathList.reset();
 	int fromStationHash = stationHashList.search(fromStation);
+    if(fromStationHash==-1)
+    {
+        return false;
+    }
 	stationPathList.operate(&stationAdjacencyList, fromStationHash);
 	return true;
 }
@@ -113,15 +117,33 @@ int Storage::getFare(QString toStation)
 	}
 }
 
-QVector<QString> Storage::getLineNameList()
+QStringList Storage::getLineNameList()
 {
-	return lineNameList;
+
+    QStringList lineNameStringList=lineNameList.toList();
+    return lineNameStringList;
 }
 
-QVector<int> Storage::getLineOrderList(int lineNum)
+QStringList Storage::getLineStationOrderList(QString lineName)
 {
-	return lineOrderList[lineNum];
+    int lineNum;
+    for(lineNum=0;lineNum<lineNameList.size();lineNum++)
+    {
+        if(lineName==lineNameList[lineNum])
+        {
+            break;
+        }
+    }
+    QStringList lineStationOrderStringList;
+    for(int i = 0;i<lineStationOrderList[lineNum].size();i++)
+    {
+        lineStationOrderStringList.append(stationHashList.hTable[lineStationOrderList[lineNum][i]]);
+    }
+    return lineStationOrderStringList;
 }
+
+
+
 
 Storage::~Storage()
 {

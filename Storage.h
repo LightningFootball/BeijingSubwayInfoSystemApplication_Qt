@@ -22,12 +22,12 @@ class Storage
 public:
 	Storage();
 
-	bool setFromStation(QString fromStation);	//dijkstra initialize
+    int setFromStation(QString fromStation);	//dijkstra initialize
     QStringList getPath(QString toStation);
 	int getDistance(QString toStation);
 	int getFare(QString toStation);
-	QVector<QString> getLineNameList();		//线路名称列表
-	QVector<int> getLineOrderList(int lineNum);	//线路站点名称顺序列表
+    QStringList getLineNameList();		//线路名称列表
+    QStringList getLineStationOrderList(QString lineName);	//线路站点名称顺序列表
 
 	~Storage();
 private:
@@ -35,7 +35,7 @@ private:
 	HashTable stationHashList;
 	
 	QVector<QString> lineNameList;
-	QVector<QVector<int> > lineOrderList;
+    QVector<QVector<int>> lineStationOrderList;
 
 	Dijkstra stationPathList;
 };
