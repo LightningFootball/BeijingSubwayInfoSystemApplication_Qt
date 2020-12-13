@@ -35,8 +35,6 @@ private slots:
 	//fromLineEdit
 	
     void on_exitButton_clicked();
-    void on_fromLineEdit_editingFinished();
-    void on_toLineEdit_editingFinished();
     void on_processButton_clicked();
     void on_fuzzySearchRadioButton_toggled(bool checked);
     void on_accurateSearchRadioButton_toggled(bool checked);

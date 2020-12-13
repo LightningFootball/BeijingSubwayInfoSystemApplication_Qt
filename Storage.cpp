@@ -115,6 +115,7 @@ int Storage::getFare(QString toStation)
 			return 6 + (distance - 32000) / 20000;
 		}
 	}
+    return 0;
 }
 
 QStringList Storage::getLineNameList()

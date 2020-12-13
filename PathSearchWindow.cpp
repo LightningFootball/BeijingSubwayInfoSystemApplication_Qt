@@ -68,22 +68,6 @@ void PathSearchWindow::on_accurateSearchRadioButton_toggled(bool checked)
 
 
 //Ä£ºýËÑË÷
-void PathSearchWindow::on_fromLineEdit_editingFinished()
-{
-    if(ui.fromLineEdit->text()!=NULL)
-    {
-        database.setFromStation(ui.fromLineEdit->text());
-    }
-}
-
-void PathSearchWindow::on_toLineEdit_editingFinished()
-{
-    if(ui.toLineEdit->text()!=NULL)
-    {
-        pathStringListModel.setStringList(database.getPath(ui.toLineEdit->text()));
-    }
-}
-
 void PathSearchWindow::on_processButton_clicked()
 {
     if(ui.fromLineEdit->text()==NULL||ui.toLineEdit->text()==NULL)
@@ -93,7 +77,10 @@ void PathSearchWindow::on_processButton_clicked()
     }
     else
     {
+        database.setFromStation(ui.fromLineEdit->text());
+        pathStringListModel.setStringList(database.getPath(ui.toLineEdit->text()));
         ui.pathList->setModel(&pathStringListModel);
+        ui.fare->setNum(database.getFare(ui.toLineEdit->text()));
     }
 
 }
@@ -110,12 +97,22 @@ void PathSearchWindow::on_toLineSwitch_currentIndexChanged(const QString &arg1)
 {
     toStationStringListModel.setStringList(database.getLineStationOrderList(arg1));
     ui.toStationSwitch->setModel(&toStationStringListModel);
-    ui.toStationSwitch->setCurrentIndex(1);
 }
 
 void PathSearchWindow::on_fromStationSwitch_currentIndexChanged(const QString &arg1)
 {
-    database.setFromStation(arg1);
+    if(ui.fromStationSwitch->currentIndex()==-1)
+    {
+        ui.fromStationSwitch->setCurrentIndex(0);
+    }
+    database.setFromStation(ui.fromStationSwitch->currentText());
+
+    if(ui.accurateSearchRadioButton->isChecked())
+    {
+        pathStringListModel.setStringList(database.getPath(ui.toStationSwitch->currentText()));
+        ui.pathList->setModel(&pathStringListModel);
+        ui.fare->setNum(database.getFare(ui.toStationSwitch->currentText()));
+    }
 }
 
 void PathSearchWindow::on_toStationSwitch_currentIndexChanged(const QString &arg1)
@@ -125,9 +122,14 @@ void PathSearchWindow::on_toStationSwitch_currentIndexChanged(const QString &arg
         InvalidInputDialog* window=new InvalidInputDialog;
         window->show();
     }
-    else
+    else if(ui.toStationSwitch->currentIndex()==-1)
     {
-        pathStringListModel.setStringList(database.getPath(arg1));
+        ui.toStationSwitch->setCurrentIndex(0);
+    }
+    else if(ui.accurateSearchRadioButton->isChecked())
+    {
+        pathStringListModel.setStringList(database.getPath(ui.toStationSwitch->currentText()));
         ui.pathList->setModel(&pathStringListModel);
+        ui.fare->setNum(database.getFare(ui.toStationSwitch->currentText()));
     }
 }
