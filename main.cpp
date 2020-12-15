@@ -8,6 +8,8 @@ Storage database;
 
 int main(int argc, char *argv[])
 {
+	//QTextCodec::setCodecForTr(QTextCodec::codecForName("GB18030"));
+
     extern Storage database;
 
     QApplication a(argc, argv);

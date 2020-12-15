@@ -9,9 +9,9 @@ Storage::Storage()
 	QTextStream cout(stdout, QIODevice::WriteOnly);		//allow qstring could cout
 
 	QString totalLineNumSTRING = infoFile.readLine();
-	int totalLineNum = totalLineNumSTRING.toInt();
+	totalLineNum = totalLineNumSTRING.toInt();
 	lineNameList.resize(totalLineNum);
-
+	lineStationNumList.resize(totalLineNum);
     lineStationOrderList.resize(totalLineNum);
 
 	for (int i = 0; i < totalLineNum; i++)
@@ -23,6 +23,8 @@ Storage::Storage()
 		int lineNum = readLineSpilted.at(0).toInt();
 		QString lineName = readLineSpilted.at(1);
 		int lineTotalStationNum = readLineSpilted.at(2).toInt();
+
+		lineStationNumList[i]=lineTotalStationNum;
 
 		lineNameList[lineNum] = lineName;
 
@@ -50,6 +52,24 @@ Storage::Storage()
 	}
 
 	stationPathList.setSpace(stationHashList.hTable.size(), stationHashList.volume);
+
+	QString colorString={"25 90 85 0 25 90 85 0 90 60 20 0 \
+85 0 30 25 40 95 10 0 20 45 100 0 \
+0 28 60 0 \
+100 0 75 0 100 0 75 0 \
+50 0 100 0 85 15 20 0 \
+5 5 90 0 18 40 30 0 18 40 30 0 \
+70 90 20 0 \
+60 20 100 0 30 30 0 20 0 99 94 0 \
+35 75 100 0 5 75 90 0 10 60 0 0 \
+5 75 90 0 0 100 10 0 30 30 0 20"};
+	QStringList colorStringList=colorString.split(' ');
+	lineColorList.resize(totalLineNum);
+	for(int i=0;i<totalLineNum;i++)
+	{
+		lineColorList[i].setCmyk(colorStringList.at(i*4).toInt(),colorStringList.at(i*4+1).toInt(),colorStringList.at(i*4+2).toInt(),colorStringList.at(i*4+3).toInt(),255);
+		cout<<colorStringList.at(i*4).toInt()<<endl;
+	}
 
 	infoFile.close();
 }
@@ -140,7 +160,32 @@ QStringList Storage::getLineStationOrderList(QString lineName)
     {
         lineStationOrderStringList.append(stationHashList.hTable[lineStationOrderList[lineNum][i]]);
     }
-    return lineStationOrderStringList;
+	return lineStationOrderStringList;
+}
+
+QStringList Storage::getLineStationOrderList(int lineNum)
+{
+	QStringList lineStationOrderStringList;
+	for(int i = 0;i<lineStationOrderList[lineNum].size();i++)
+	{
+		lineStationOrderStringList.append(stationHashList.hTable[lineStationOrderList[lineNum][i]]);
+	}
+	return lineStationOrderStringList;
+}
+
+int Storage::getLineStationNum(int lineNum)
+{
+	return lineStationNumList[lineNum];
+}
+
+int Storage::getTotalLineNum()
+{
+	return  totalLineNum;
+}
+
+QColor Storage::getLineColor(int lineNum)
+{
+	return lineColorList[lineNum];
 }
 
 

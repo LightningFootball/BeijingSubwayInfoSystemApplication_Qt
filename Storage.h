@@ -16,6 +16,7 @@
 #include<qstringlist.h>
 #include<qfile.h>
 #include<qtextstream.h>
+#include "QColor"
 
 class Storage
 {
@@ -28,6 +29,10 @@ public:
 	int getFare(QString toStation);
     QStringList getLineNameList();		//线路名称列表
     QStringList getLineStationOrderList(QString lineName);	//线路站点名称顺序列表
+	QStringList getLineStationOrderList(int lineNum);		//线路站点名称顺序列表
+	int getLineStationNum(int lineNum); //指定线路站点数量
+	int getTotalLineNum();      //总线路数量
+	QColor getLineColor(int lineNum);
 
 	~Storage();
 private:
@@ -36,6 +41,9 @@ private:
 	
 	QVector<QString> lineNameList;
     QVector<QVector<int>> lineStationOrderList;
+	QVector<int> lineStationNumList;
+	int totalLineNum;
+	QVector<QColor> lineColorList;
 
 	Dijkstra stationPathList;
 };

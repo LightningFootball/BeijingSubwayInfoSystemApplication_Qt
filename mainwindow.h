@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include "PathSearchWindow.h"
+#include "FareSearchWindow.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,6 +20,8 @@ public:
 
 private slots:
     void on_pathSearchButton_clicked();
+
+    void on_fareSearchButto_clicked();
 
 private:
     Ui::MainWindow *ui;
