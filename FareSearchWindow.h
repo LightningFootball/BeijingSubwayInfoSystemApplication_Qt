@@ -11,6 +11,7 @@
 #include "QStandardItemModel"
 #include "QStandardItem"
 #include "QList"
+#include "QBrush"
 #include "QColor"
 
 #include "Storage.h"
@@ -29,12 +30,16 @@ public:
 
 	FareSearchWindow(QWidget *parent = Q_NULLPTR);
 	~FareSearchWindow();
+signals:
+	void fareWindowCloseSignal();
 
 private slots:
     void on_lineSwitch_currentIndexChanged(const QString &arg1);
 
 	void on_stationSwitch_currentTextChanged(const QString &arg1);
 
-private:
+	void on_returnButton_clicked();
+
+	private:
 	Ui::FareSearchWindow ui;
 };

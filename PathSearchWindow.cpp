@@ -29,7 +29,8 @@ PathSearchWindow::~PathSearchWindow()
 
 void PathSearchWindow::on_exitButton_clicked()
 {
-    this->close();
+	emit pathSearchWindowClosedSignal();
+	this->close();
 }
 
 

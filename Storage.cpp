@@ -2,8 +2,9 @@
 
 Storage::Storage()
 {
-    QFile infoFile("C:/WorkSpace/Beijing Subway Info System/BeijingSubwayInfoSystemApplication_Qt/SubwayInfoDatabase.txt");
-    infoFile.open(QIODevice::ReadOnly|QIODevice::Text);		//open file
+	//QFile infoFile("C:/WorkSpace/Beijing Subway Info System/BeijingSubwayInfoSystemApplication_Qt/SubwayInfoDatabase.txt");
+	QFile infoFile("SubwayInfoDatabase.txt");
+	infoFile.open(QIODevice::ReadOnly/*|QIODevice::Text*/);		//open file
 
 	QTextStream cin(stdin, QIODevice::ReadOnly);
 	QTextStream cout(stdout, QIODevice::WriteOnly);		//allow qstring could cout
@@ -53,22 +54,35 @@ Storage::Storage()
 
 	stationPathList.setSpace(stationHashList.hTable.size(), stationHashList.volume);
 
-	QString colorString={"25 90 85 0 25 90 85 0 90 60 20 0 \
-85 0 30 25 40 95 10 0 20 45 100 0 \
-0 28 60 0 \
-100 0 75 0 100 0 75 0 \
-50 0 100 0 85 15 20 0 \
-5 5 90 0 18 40 30 0 18 40 30 0 \
-70 90 20 0 \
-60 20 100 0 30 30 0 20 0 99 94 0 \
-35 75 100 0 5 75 90 0 10 60 0 0 \
-5 75 90 0 0 100 10 0 30 30 0 20"};
+	QString colorString={"190 54 49 \
+190 54 49 \
+15 97 146 \
+0 137 148 \
+165 35 122 \
+210 148 4 \
+249 195 116 \
+0 146 99 \
+0 146 99 \
+150 190 11 \
+0 154 186 \
+248 225 20 \
+212 167 161 \
+212 167 161 \
+107 55 119 \
+124 158 33 \
+0 0 205 \
+226 6 33 \
+176 86 31 \
+225 92 40 \
+221 131 176 \
+225 92 40 \
+226 0 114 \
+160 154 184"};
 	QStringList colorStringList=colorString.split(' ');
 	lineColorList.resize(totalLineNum);
 	for(int i=0;i<totalLineNum;i++)
 	{
-		lineColorList[i].setCmyk(colorStringList.at(i*4).toInt(),colorStringList.at(i*4+1).toInt(),colorStringList.at(i*4+2).toInt(),colorStringList.at(i*4+3).toInt(),255);
-		cout<<colorStringList.at(i*4).toInt()<<endl;
+		lineColorList[i].setRgb(colorStringList.at(i*3).toInt(),colorStringList.at(i*3+1).toInt(),colorStringList.at(i*3+2).toInt());
 	}
 
 	infoFile.close();
@@ -135,7 +149,7 @@ int Storage::getFare(QString toStation)
 			return 6 + (distance - 32000) / 20000;
 		}
 	}
-    return 0;
+	return 3;
 }
 
 QStringList Storage::getLineNameList()

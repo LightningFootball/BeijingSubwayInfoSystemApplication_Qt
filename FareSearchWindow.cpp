@@ -81,12 +81,13 @@ void FareSearchWindow::on_stationSwitch_currentTextChanged(const QString &arg1)
 		while (currentLinePointer<linePointer)
 		{
 			//线路名称段
-			ui.fareTable->setSpan(rowPointer,columnPointer,1,2);
+			ui.fareTable->setSpan(rowPointer,columnPointer,2,2);
 			QStandardItem* tempLineName=new QStandardItem(database.getLineNameList().at(currentLinePointer));
 			tempLineName->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-			tempLineName->setData(QBrush(database.getLineColor(currentLinePointer)));
+			tempLineName->setBackground(QBrush(database.getLineColor(currentLinePointer)));
+			tempLineName->setForeground(QBrush(QColor("white")));
 			stationItemModel->setItem(rowPointer,columnPointer,tempLineName);
-			rowPointer++;
+			rowPointer+=2;
 
 			//线路名称头
 			QStandardItem* lineHead1=new QStandardItem("Station");
@@ -102,11 +103,42 @@ void FareSearchWindow::on_stationSwitch_currentTextChanged(const QString &arg1)
 			{
 				QStandardItem* tempStationName=new QStandardItem(database.getLineStationOrderList(currentLinePointer).at(i));
 				QString* tempFareString=new QString;
-				int testFare=database.getFare(database.getLineStationOrderList(currentLinePointer).at(i));
-				tempFareString->setNum(testFare);
+				tempFareString->setNum(database.getFare(database.getLineStationOrderList(currentLinePointer).at(i)));
 				QStandardItem* tempFare=new QStandardItem(*tempFareString);
+
 				tempStationName->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
 				tempFare->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+				switch (database.getFare(database.getLineStationOrderList(currentLinePointer).at(i)))
+				{
+					case 3:
+						tempFare->setBackground(QBrush(QColor("yellowgreen")));
+						break;
+					case 4:
+						tempFare->setBackground(QBrush(QColor("green")));
+						break;
+					case 5:
+						tempFare->setBackground(QBrush(QColor("dodgerblue")));
+						break;
+					case 6:
+						tempFare->setBackground(QBrush(QColor("midnightblue")));
+						break;
+					case 7:
+						tempFare->setBackground(QBrush(QColor("mediumvioletred")));
+						break;
+					case 8:
+						tempFare->setBackground(QBrush(QColor("lightslategray")));
+						break;
+					default:
+						tempFare->setBackground(QBrush(QColor("darkslategray")));
+						break;
+				}
+				if(ui.stationSwitch->currentText()==database.getLineStationOrderList(currentLinePointer).at(i))
+				{
+					tempStationName->setBackground(QBrush(QColor("darkviolet")));
+					tempStationName->setForeground(QBrush(QColor("white")));
+				}
+				tempFare->setForeground(QBrush(QColor("white")));
+
 				stationItemModel->setItem(rowPointer,columnPointer,tempStationName);
 				stationItemModel->setItem(rowPointer,columnPointer+1,tempFare);
 				++rowPointer;
@@ -120,4 +152,10 @@ void FareSearchWindow::on_stationSwitch_currentTextChanged(const QString &arg1)
 	ui.fareTable->resizeRowsToContents();
 	//ui.fareTable->horizontalHeader()->setVisible(true);
 	//ui.fareTable->verticalHeader()->setVisible(true);
+}
+
+void FareSearchWindow::on_returnButton_clicked()
+{
+	emit fareWindowCloseSignal();
+	this->close();
 }

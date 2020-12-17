@@ -42,4 +42,7 @@ private slots:
     void on_toLineSwitch_currentIndexChanged(const QString &arg1);
     void on_fromStationSwitch_currentIndexChanged(const QString &arg1);
     void on_toStationSwitch_currentIndexChanged(const QString &arg1);
+
+signals:
+	void pathSearchWindowClosedSignal();
 };

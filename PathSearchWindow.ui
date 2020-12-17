@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>PathSearchWindow</string>
+   <string>PathSearch</string>
   </property>
   <property name="windowIcon">
    <iconset resource="BeijingSubwayInfoSystemApplication.qrc">
@@ -231,7 +231,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>返回</string>
    </property>
   </widget>
   <widget class="QLabel" name="fareIntroduce">
@@ -274,6 +274,19 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>fromLineEdit</tabstop>
+  <tabstop>toLineEdit</tabstop>
+  <tabstop>processButton</tabstop>
+  <tabstop>fromLineSwitch</tabstop>
+  <tabstop>toLineSwitch</tabstop>
+  <tabstop>toStationSwitch</tabstop>
+  <tabstop>fromStationSwitch</tabstop>
+  <tabstop>pathList</tabstop>
+  <tabstop>exitButton</tabstop>
+  <tabstop>accurateSearchRadioButton</tabstop>
+  <tabstop>fuzzySearchRadioButton</tabstop>
+ </tabstops>
  <resources>
   <include location="BeijingSubwayInfoSystemApplication.qrc"/>
  </resources>

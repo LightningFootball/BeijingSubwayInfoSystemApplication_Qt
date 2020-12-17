@@ -5,6 +5,8 @@
 
 #include "PathSearchWindow.h"
 #include "FareSearchWindow.h"
+#include "MapWindow.h"
+#include "AboutWindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,7 +25,18 @@ private slots:
 
     void on_fareSearchButto_clicked();
 
-private:
+	void on_mapSearchButton_clicked();
+
+	void on_actionAbout_triggered();
+
+	void windowShow();
+
+	private:
     Ui::MainWindow *ui;
+
+	PathSearchWindow* pathSearchWindow=new PathSearchWindow;
+	FareSearchWindow* fareSearchWindow=new FareSearchWindow;
+	MapWindow* mapWindow=new MapWindow;
+	AboutWindow* aboutWindow= new AboutWindow;
 };
 #endif // MAINWINDOW_H

@@ -9,6 +9,7 @@ CONFIG += c++11
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+RC_FILE += data.rc
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -16,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AboutWindow.cpp \
     Arc.cpp \
     Dijkstra.cpp \
     FareSearchWindow.cpp \
@@ -23,6 +25,7 @@ SOURCES += \
     HashTable.cpp \
     InvalidInputDialog.cpp \
     ListGraph.cpp \
+    MapWindow.cpp \
     Path.cpp \
     PathSearchWindow.cpp \
     PriorityQueue.cpp \
@@ -32,6 +35,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    AboutWindow.h \
     Arc.h \
     DataProcess.h \
     Dijkstra.h \
@@ -40,6 +44,7 @@ HEADERS += \
     HashTable.h \
     InvalidInputDialog.h \
     ListGraph.h \
+    MapWindow.h \
     Path.h \
     PathSearchWindow.h \
     PriorityQueue.h \
@@ -48,8 +53,10 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    AboutWindow.ui \
     FareSearchWindow.ui \
     InvalidInputDialog.ui \
+    MapWindow.ui \
     PathSearchWindow.ui \
     mainwindow.ui
 
@@ -65,4 +72,4 @@ RESOURCES += \
     BeijingSubwayInfoSystemApplication.qrc
 
 DISTFILES += \
-    SubwayInfoDatabase.txt
+	data.rc
