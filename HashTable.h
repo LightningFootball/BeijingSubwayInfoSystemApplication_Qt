@@ -24,6 +24,9 @@ public:
 	int insert(QString string);
 	int search(QString string);
 	QString getName(int hashNum);
+
+	QVector<int> fuzzySearch(QString string);
+	QVector<int> fullMatchingFuzzySearch(QString string);
 	
 	~HashTable();
 

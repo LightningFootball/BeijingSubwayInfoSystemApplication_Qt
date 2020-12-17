@@ -14,6 +14,11 @@
 #include "QBrush"
 #include "QColor"
 
+#include "QModelIndex"
+#include "QVariant"
+
+#include "PathPopup.h"
+
 #include "Storage.h"
 
 extern Storage database;
@@ -39,6 +44,8 @@ private slots:
 	void on_stationSwitch_currentTextChanged(const QString &arg1);
 
 	void on_returnButton_clicked();
+
+	void on_fareTable_doubleClicked(const QModelIndex &index);
 
 	private:
 	Ui::FareSearchWindow ui;

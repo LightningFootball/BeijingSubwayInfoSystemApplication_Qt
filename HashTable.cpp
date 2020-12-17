@@ -58,6 +58,57 @@ QString HashTable::getName(int hashNum)
 	return hTable[hashNum];
 }
 
+QVector<int> HashTable::fuzzySearch(QString string)
+{
+	QVector<int> fuzzyList;
+	for(int i=0;i<hTable.size();++i)
+	{
+		for(int j=0;j<string.size();++j)
+		{
+			if(hTable.at(i).contains(string.at(j)))
+			{
+				bool conflict=false;
+				for(int k=0;k<fuzzyList.size();++k)
+				{
+					if(fuzzyList.at(k)==i)
+					{
+						conflict=true;
+					}
+				}
+				if(!conflict)
+				{
+					fuzzyList.append(i);
+				}
+			}
+		}
+	}
+	return fuzzyList;
+}
+
+QVector<int> HashTable::fullMatchingFuzzySearch(QString string)
+{
+	QVector<int> fuzzyList;
+	for(int i=0;i<hTable.size();++i)
+	{
+		if(hTable.at(i).contains(string))
+		{
+			bool conflict=false;
+			for(int k=0;k<fuzzyList.size();++k)
+			{
+				if(fuzzyList.at(k)==i)
+				{
+					conflict=true;
+				}
+			}
+			if(!conflict)
+			{
+				fuzzyList.append(i);
+			}
+		}
+	}
+	return fuzzyList;
+}
+
 bool HashTable::resize()
 {
 	hTable.resize(hTable.size() / 0.75);

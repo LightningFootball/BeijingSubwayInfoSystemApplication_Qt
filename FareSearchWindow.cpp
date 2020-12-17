@@ -159,3 +159,14 @@ void FareSearchWindow::on_returnButton_clicked()
 	emit fareWindowCloseSignal();
 	this->close();
 }
+
+void FareSearchWindow::on_fareTable_doubleClicked(const QModelIndex &index)
+{
+	QVariant variant=index.data();
+	if(!database.getPath(index.data().toString()).isEmpty())
+	{
+		PathPopup* window =new PathPopup;
+		window->setToStation(index.data().toString());
+		window->show();
+	}
+}

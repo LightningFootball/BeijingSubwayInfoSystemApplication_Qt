@@ -23,7 +23,7 @@ class Storage
 public:
 	Storage();
 
-    int setFromStation(QString fromStation);	//dijkstra initialize
+	bool setFromStation(QString fromStation);	//dijkstra initialize
     QStringList getPath(QString toStation);
 	int getDistance(QString toStation);
 	int getFare(QString toStation);
@@ -32,7 +32,9 @@ public:
 	QStringList getLineStationOrderList(int lineNum);		//线路站点名称顺序列表
 	int getLineStationNum(int lineNum); //指定线路站点数量
 	int getTotalLineNum();      //总线路数量
-	QColor getLineColor(int lineNum);
+	QColor getLineColor(int lineNum);	//国标线路颜色
+
+	QStringList getStationNameHint(QString stationName,bool hintWay);	//站点名称提示
 
 	~Storage();
 private:

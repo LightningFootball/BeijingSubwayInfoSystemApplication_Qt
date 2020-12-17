@@ -54,7 +54,8 @@ Storage::Storage()
 
 	stationPathList.setSpace(stationHashList.hTable.size(), stationHashList.volume);
 
-	QString colorString={"190 54 49 \
+	QString colorString={"\
+190 54 49 \
 190 54 49 \
 15 97 146 \
 0 137 148 \
@@ -89,7 +90,7 @@ Storage::Storage()
 }
 
 
-int Storage::setFromStation(QString fromStation)
+bool Storage::setFromStation(QString fromStation)
 {
 	stationPathList.reset();
 	int fromStationHash = stationHashList.search(fromStation);
@@ -103,8 +104,12 @@ int Storage::setFromStation(QString fromStation)
 
 QStringList Storage::getPath(QString toStation)
 {
+	QStringList path;
 	int toStationHash = stationHashList.search(toStation);
-    QStringList path;
+	if(toStationHash==-1)
+	{
+		return path;
+	}
 	for (int i = 1; stationPathList.dijkstraList[toStationHash][i] != -1; i++)
 	{
 		path.append(stationHashList.getName(stationPathList.dijkstraList[toStationHash][i]));
@@ -200,6 +205,27 @@ int Storage::getTotalLineNum()
 QColor Storage::getLineColor(int lineNum)
 {
 	return lineColorList[lineNum];
+}
+
+QStringList Storage::getStationNameHint(QString stationName,bool hintWay)
+{
+	//	bool fuzzySearchOption;	//true->partialMatching false->fullMatching
+	QStringList returnList;
+	QVector<int> hintList;
+	if(hintWay)
+	{
+		hintList = stationHashList.fuzzySearch(stationName);
+	}
+	else
+	{
+		hintList = stationHashList.fullMatchingFuzzySearch(stationName);
+	}
+
+	for(int i=0;i<hintList.size();++i)
+	{
+		returnList.append(stationHashList.getName(hintList.at(i)));
+	}
+	return returnList;
 }
 
 

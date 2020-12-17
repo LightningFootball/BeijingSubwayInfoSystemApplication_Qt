@@ -27,6 +27,7 @@ SOURCES += \
     ListGraph.cpp \
     MapWindow.cpp \
     Path.cpp \
+    PathPopup.cpp \
     PathSearchWindow.cpp \
     PriorityQueue.cpp \
     Storage.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     ListGraph.h \
     MapWindow.h \
     Path.h \
+    PathPopup.h \
     PathSearchWindow.h \
     PriorityQueue.h \
     Storage.h \
@@ -57,6 +59,7 @@ FORMS += \
     FareSearchWindow.ui \
     InvalidInputDialog.ui \
     MapWindow.ui \
+    PathPopup.ui \
     PathSearchWindow.ui \
     mainwindow.ui
 

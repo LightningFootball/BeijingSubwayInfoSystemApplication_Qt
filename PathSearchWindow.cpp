@@ -43,7 +43,6 @@ void PathSearchWindow::on_fuzzySearchRadioButton_toggled(bool checked)
         ui.toStationSwitch->hide();
         ui.fromStationSwitch->hide();
         ui.fromLineSwitch->hide();
-        ui.processButton->show();
     }else
     {
         ui.toLineSwitch->show();
@@ -60,15 +59,51 @@ void PathSearchWindow::on_accurateSearchRadioButton_toggled(bool checked)
         ui.fromLineEdit->hide();
         ui.toLineEdit->hide();
         ui.processButton->hide();
+		ui.fuzzyIndexGroupBox->hide();
     }else
     {
         ui.fromLineEdit->show();
         ui.toLineEdit->show();
+		ui.processButton->show();
+		ui.fuzzyIndexGroupBox->show();
     }
 }
 
+void PathSearchWindow::on_partialMatching_clicked(bool checked)
+{
+	//	bool fuzzySearchOption;	//true->partialMatching false->fullMatching
+	fuzzySearchOption=checked;
+}
+
+void PathSearchWindow::on_fullMatching_clicked(bool checked)
+{
+	//	bool fuzzySearchOption;	//true->partialMatching false->fullMatching
+	fuzzySearchOption=!checked;
+}
+
+
 
 //Ä£ºýËÑË÷
+
+void PathSearchWindow::on_fromLineEdit_textChanged(const QString &arg1)
+{
+	QStringList hintList=database.getStationNameHint(arg1,fuzzySearchOption);
+	QCompleter* completer=new QCompleter(hintList,this);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
+	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+	completer->setFilterMode(Qt::MatchContains);
+	ui.fromLineEdit->setCompleter(completer);
+}
+
+void PathSearchWindow::on_toLineEdit_textChanged(const QString &arg1)
+{
+	QStringList hintList=database.getStationNameHint(arg1,fuzzySearchOption);
+	QCompleter* completer=new QCompleter(hintList,this);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
+	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+	ui.toLineEdit->setCompleter(completer);
+}
+
 void PathSearchWindow::on_processButton_clicked()
 {
     if(ui.fromLineEdit->text()==NULL||ui.toLineEdit->text()==NULL)
@@ -78,7 +113,12 @@ void PathSearchWindow::on_processButton_clicked()
     }
     else
     {
-        database.setFromStation(ui.fromLineEdit->text());
+		if(!database.setFromStation(ui.fromLineEdit->text()))
+		{
+			InvalidInputDialog* window=new InvalidInputDialog;
+			window->show();
+			return;
+		}
         pathStringListModel.setStringList(database.getPath(ui.toLineEdit->text()));
         ui.pathList->setModel(&pathStringListModel);
         ui.fare->setNum(database.getFare(ui.toLineEdit->text()));

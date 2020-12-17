@@ -9,7 +9,8 @@ MapWindow::MapWindow(QWidget *parent) :
 	QImage map;
 	map.load(":/Picture/Resorce/subway_map.jpg");
 	QPixmap mapPix=QPixmap::fromImage(map);
-	ui->Picture->setScaledContents(true);
+
+	//ui->Picture->setSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored);
 	ui->Picture->setPixmap(mapPix);
 	ui->Picture->setScaledContents(true);
 }
